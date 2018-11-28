@@ -3,6 +3,7 @@
 //
 
 #include "MiniMax.h"
+#include "AStar.hpp"
 #include <climits>
 using namespace MiniMax;
 
@@ -19,6 +20,41 @@ int Generator::tour(State s, MinMax m, int epoch, uint playerId, uint enemyId) {
             switch(i) {
                 case ActionType::MOVE_CL :
                     // TODO: use heuristic ai to compute newState
+                    Position objectif = s.getPlayers()[enemyId]->getPokemon()->getPosition();
+                    Position current = s.getPlayers()[player]->getPokemon()->getPosition();
+
+                    AStar::Generator generator;
+                    int width = (int)(s.getMap()->getWidth());
+                    int height = (int)(s.getMap()->getHeight());
+                    generator.setWorldSize({(int)(s.getMap()->getWidth()), (int)(s.getMap()->getHeight())});
+                    generator.setHeuristic(AStar::Heuristic::manhattan);
+                    int k = 0;
+                    for (int i =0 ; i<height; i++ )
+                    {
+                        for (int j = 0 ; j<width; j++)
+                        {
+                            if(s.getMap()->getLayers()->at(0).getData()->at(k)!=35)
+                            {
+                                Vec2i v;
+                                v.x = j;
+                                v.y = i;
+                                generator.addCollision(v);
+                            }
+                            k++;
+                        }
+                    }
+                    Vec2i srce,obj;
+                    srce.x = current.x;
+                    srce.y = current.y;
+
+                    obj.x = objectif.x;
+                    obj.y = objectif.y;
+                    auto path = generator.findPath(srce,obj);
+                    auto nextTile = path[path.size()-2];
+                    cout << nextTile.x << " " << nextTile.y <<endl;
+                    Position p(nextTile.x,nextTile.y)
+                    s.getPlayers()[playerId]->getPokemon()->setPosition(p);
+
                     break;
                 case ActionType::MOVE_AW :
                     // TODO: find algo which computes the best move to avoid the other player and compute newState
