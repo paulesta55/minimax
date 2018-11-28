@@ -4,9 +4,11 @@
 
 #include "MiniMax.h"
 #include "AStar.hpp"
+#include "engine.h"
 #include <climits>
 using namespace MiniMax;
 
+using namespace engine;
 
 
 int Generator::tour(State s, MinMax m, int epoch, uint playerId, uint enemyId) {
@@ -18,7 +20,6 @@ int Generator::tour(State s, MinMax m, int epoch, uint playerId, uint enemyId) {
         for(int i = ActionType ::MOVE_CL; i< ActionType::ATTACK;i++) {
             State newState = s;
             Engine engine(s);
-            e.
             switch(i) {
                 case ActionType::MOVE_CL :
                     Position objectif = newState.getPlayers()[enemyId]->getPokemon()->getPosition();
@@ -65,9 +66,9 @@ int Generator::tour(State s, MinMax m, int epoch, uint playerId, uint enemyId) {
                     for(int i = 0; i < 2;i++) {
                         switch(i) {
                             case 0:
-
+                                //check position
+                                engine.addCommand(make_shared<MoveCommand>(enemyOrient,playerId));
                                 break;
-
                         }
                     }
                     break;
