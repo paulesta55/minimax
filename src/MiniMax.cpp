@@ -17,6 +17,8 @@ int Generator::tour(State s, MinMax m, int epoch, uint playerId, uint enemyId) {
         int cost = m == MAX?0:INT_MAX;
         for(int i = ActionType ::MOVE_CL; i< ActionType::ATTACK;i++) {
             State newState = s;
+            Engine engine(s);
+            e.
             switch(i) {
                 case ActionType::MOVE_CL :
                     Position objectif = newState.getPlayers()[enemyId]->getPokemon()->getPosition();
@@ -59,7 +61,15 @@ int Generator::tour(State s, MinMax m, int epoch, uint playerId, uint enemyId) {
                     // TODO: find algo which computes the best move to avoid the other player and compute newState
                     Position currentPos = s.getPlayers()[playerId]->getPokemon()->getPosition();
                     Position enemyPos = s.getPlayers()[enemyId]->getPokemon()->getPosition();
+                    Orientation enemyOrient = s.getPlayers()[enemyId]->getPokemon()->getOrientation();
+                    for(int i = 0; i < 2;i++) {
+                        switch(i) {
+                            case 0:
 
+                                break;
+
+                        }
+                    }
                     break;
                 case ActionType ::ATTACK :
                     // TODO: make a method which compute whether player can attack enemy
