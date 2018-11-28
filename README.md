@@ -11,10 +11,8 @@ $ git clone <estanocandassamy>
 $ git clone <minimax>
 $ cd /minimax
 $ cp -r ../estanocandassamy/src/shared/state ./src/
-$ cp  ../estanocandassamy/src/shared/state.h ./src/
 $ cp -r ../estanocandassamy/src/shared/engine ./src/
-$ cp  ../estanocandassamy/src/shared/engine.h ./src/
-$ cmake . 
+$ cmake .
 $ make 
 $ ./minimax
 ```
