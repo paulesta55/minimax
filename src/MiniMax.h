@@ -45,6 +45,7 @@ namespace MiniMax {
         int tour(State,MinMax,int epoch,uint playerId, uint enemyId);
         int computeCost(State&);
         bool checkCase(Position, State&);
+        vector<Orientation> findNeighbors(Position&,State&,Position&);
     public:
         shared_ptr<Action> compute(State s);
     };
